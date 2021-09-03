@@ -14,11 +14,11 @@ class UsersController extends Controller
     {
         if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
             $user = Auth::user();
-            $success['token'] = $user->createToken('appToken')->accessToken;
+            $token = $user->createToken('appToken')->accessToken;
             //After successfull authentication, notice how I return json parameters
             return response()->json([
                 'success' => true,
-                'token' => $success,
+                'token' => $token,
                 'user' => $user,
             ]);
         } else {
