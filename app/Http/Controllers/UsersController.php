@@ -10,8 +10,19 @@ use Illuminate\Support\Facades\Validator;
 class UsersController extends Controller
 {
     //
-    public function login()
+    public function login(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|exists:users',
+            'password' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => $validator->errors(),
+            ], 200);
+        }
+
         if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
             $user = Auth::user();
             $token = $user->createToken('appToken')->accessToken;
@@ -25,8 +36,9 @@ class UsersController extends Controller
             //if authentication is unsuccessfull, notice how I return json parameters
             return response()->json([
                 'success' => false,
-                'message' => 'Invalid Email or Password',
-            ], 401);
+                'message' => ['password' => ['密碼錯誤']],
+            ], 200);
+
         }
     }
 
