@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,4 +22,6 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('/login', [UsersController::class, 'login']);
     Route::post('/register', [UsersController::class, 'register']);
     Route::get('/logout', [UsersController::class, 'logout'])->middleware('auth:api');
+    Route::post('/forgot-password', [PasswordResetLinkController::class, 'api'])->middleware('guest');
+
 });
