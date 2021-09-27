@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\QaController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -25,4 +26,6 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('/logout', [UsersController::class, 'logout'])->middleware('auth:api');
     Route::post('/forgot-password', [PasswordResetLinkController::class, 'api'])->middleware('guest');
     Route::get('/mongoTest', [QaController::class, 'mongoTest']);
+    Route::get('/getallcompanies', [CompanyController::class, 'getAll'])->middleware('auth:api');
+    Route::post('/savecompany', [CompanyController::class, 'save'])->middleware('auth:api');
 });
