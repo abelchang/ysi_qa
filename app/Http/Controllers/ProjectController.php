@@ -13,9 +13,9 @@ class ProjectController extends Controller
     {
         if (Auth::id()) {
             $projectData = $request->project;
-            $companyData = $request->project->company;
+            $companyData = $request->project['company'];
             $company = Company::updateOrCreate(['name' => $companyData['name']], $companyData);
-            $projectData->company_id = $company->id;
+            $projectData['company_id'] = $company->id;
             $project = Project::create($projectData);
             return response()->json([
                 'success' => true,
