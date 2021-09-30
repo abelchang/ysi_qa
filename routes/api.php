@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 Route::group(['prefix' => 'v1'], function () {
+    Route::get('/checkIfLogin', [UsersController::class, 'checkIfLogin'])->middleware('auth:api');
     Route::post('/login', [UsersController::class, 'login']);
     Route::post('/register', [UsersController::class, 'register']);
     Route::get('/logout', [UsersController::class, 'logout'])->middleware('auth:api');

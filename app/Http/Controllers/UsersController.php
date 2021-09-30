@@ -10,6 +10,22 @@ use Illuminate\Support\Facades\Validator;
 class UsersController extends Controller
 {
     //
+
+    public function checkIfLogin(Request $request)
+    {
+        if (Auth::check()) {
+            return response()->json([
+                'success' => true,
+
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+            ]);
+
+        }
+    }
+
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
