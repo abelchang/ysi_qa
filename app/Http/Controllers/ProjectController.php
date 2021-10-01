@@ -11,12 +11,12 @@ class ProjectController extends Controller
 {
     public function save(Request $request)
     {
-        if (Auth::id()) {
+        if (Auth::check()) {
             $projectData = $request->project;
             $companyData = $request->project['company'];
             $company = Company::updateOrCreate(['name' => $companyData['name']], $companyData);
             $projectData['company_id'] = $company->id;
-            $project = Project::updateOrCreate(['id' => $projectData['id']], $projectData);
+            $project = Project::updateOrCreate(['id' => $projectData['id']], $projectData)->with('company', 'answers', 'linkCodes', 'qa')->first();
             return response()->json([
                 'success' => true,
                 'project' => $project,
@@ -26,6 +26,18 @@ class ProjectController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Unable to create project',
+            ]);
+        }
+
+    }
+
+    public function getAll(Request $request)
+    {
+        if (Auth::check()) {
+            $projects = Project::with('company', 'answers', 'linkCodes', 'qa')->orderBy('start', 'desc')->get();
+            return response()->json([
+                'success' => true,
+                'projects' => $projects,
             ]);
         }
 

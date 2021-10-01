@@ -31,4 +31,5 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('/getallcompanies', [CompanyController::class, 'getAll'])->middleware('auth:api');
     Route::post('/savecompany', [CompanyController::class, 'save'])->middleware('auth:api');
     Route::post('/project/save', [ProjectController::class, 'save'])->middleware('auth:api');
+    Route::get('/project/getall', [ProjectController::class, 'getAll'])->middleware('auth:api');
 });
