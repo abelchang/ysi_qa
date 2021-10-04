@@ -18,6 +18,7 @@ class CreateAoptionsTable extends Migration
             $table->timestamps();
             $table->string('title')->nullable()->comment('選項標題');
             $table->tinyInteger('score')->nullable()->comment('選項分數');
+            $table->tinyInteger('no')->nullable()->comment('選項編號');
         });
     }
 

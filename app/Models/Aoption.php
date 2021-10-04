@@ -9,5 +9,5 @@ class Aoption extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['score', 'title'];
+    protected $fillable = ['score', 'title', 'no'];
 }
