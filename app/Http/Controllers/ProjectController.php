@@ -14,9 +14,13 @@ class ProjectController extends Controller
         if (Auth::check()) {
             $projectData = $request->project;
             $companyData = $request->project['company'];
+            $qaData = $request->project['qa'];
             $company = Company::updateOrCreate(['name' => $companyData['name']], $companyData);
             $projectData['company_id'] = $company->id;
             $project = Project::updateOrCreate(['id' => $projectData['id']], $projectData)->with('company', 'answers', 'linkCodes', 'qa')->first();
+            if ($qaData != null) {
+                $project->qa()->create($qaData);
+            }
             return response()->json([
                 'success' => true,
                 'project' => $project,
