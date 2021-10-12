@@ -19,7 +19,7 @@ class ProjectController extends Controller
             $projectData['company_id'] = $company->id;
             $project = Project::updateOrCreate(['id' => $projectData['id']], $projectData)->with('company', 'answers', 'linkCodes', 'qa')->first();
             if ($qaData != null) {
-                $project->qa()->create($qaData);
+                $project->qa()->updateOrCreate(['_id' => $qaData['_id']], $qaData);
             }
             return response()->json([
                 'success' => true,
