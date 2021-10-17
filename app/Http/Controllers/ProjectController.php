@@ -22,18 +22,18 @@ class ProjectController extends Controller
             $project = Project::updateOrCreate(['id' => $projectData['id']], $projectData);
             if ($qaData != null) {
                 $project->qa()->updateOrCreate(['_id' => $qaData['_id']], $qaData);
-                if ($linkCodes == null) {
-                    for ($i = 0; $i < 2; $i++) {
+            }
+            if ($linkCodes == null) {
+                for ($i = 0; $i < 2; $i++) {
+                    $code = $this->generateRandomString();
+                    while (Linkcode::where('code', $code)->exists()) {
                         $code = $this->generateRandomString();
-                        while (Linkcode::where('code', $code)->exists()) {
-                            $code = $this->generateRandomString();
-                        }
-                        $project->linkCodes()->create(['name' => '', 'count' => 0, 'code' => $code]);
                     }
-                } else {
-                    foreach ($request->project['linkcodes'] as $linkcode) {
-                        $project->linkcodes()->updateOrCreate(['id' => $linkcode['id']], $linkcode);
-                    }
+                    $project->linkCodes()->create(['name' => '', 'count' => 0, 'code' => $code]);
+                }
+            } else {
+                foreach ($request->project['linkcodes'] as $linkcode) {
+                    $project->linkcodes()->updateOrCreate(['id' => $linkcode['id']], $linkcode);
                 }
             }
             $project->company;
