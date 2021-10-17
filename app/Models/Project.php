@@ -23,7 +23,7 @@ class Project extends Model
         return $this->hasMany(Answer::class);
     }
 
-    public function linkCodes()
+    public function linkcodes()
     {
         return $this->hasMany(Linkcode::class);
     }
