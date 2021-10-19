@@ -28,7 +28,7 @@ class ProjectController extends Controller
                         while (Linkcode::where('code', $code)->exists()) {
                             $code = $this->generateRandomString();
                         }
-                        $project->linkCodes()->create(['name' => '', 'count' => 0, 'code' => $code]);
+                        $project->linkCodes()->create(['name' => '', 'count' => 0, 'code' => $code, 'url' => url($code)]);
                     }
                 } else {
                     foreach ($request->project['linkcodes'] as $linkcode) {

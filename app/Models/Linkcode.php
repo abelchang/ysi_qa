@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Linkcode extends Model
 {
     use HasFactory;
-    protected $fillable = ['code', 'name', 'count', 'project_id'];
+    protected $fillable = ['url', 'code', 'name', 'count', 'project_id'];
 
     public function project()
     {
