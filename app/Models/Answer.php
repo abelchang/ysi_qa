@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Answer extends Model
 {
     use HasFactory;
-    protected $fillable = ['score', 'qnumber'];
+    protected $fillable = ['score', 'qnumber', 'project_id', 'linkcode_id'];
 
     public function project()
     {
