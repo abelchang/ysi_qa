@@ -20,7 +20,7 @@ class CreateLinkcodesTable extends Migration
             $table->string('url')->nullable()->comment('連結');
             $table->string('name')->nullable()->comment('問卷類型');
             $table->integer('count')->default(1)->comment('問卷份數');
-            $table->integer('done')->nullable()->comment('完成數量');
+            $table->integer('done')->default(0)->comment('完成數量');
             $table->unsignedBigInteger('project_id')->comment('專案');
             $table->foreign('project_id')
                 ->references('id')
