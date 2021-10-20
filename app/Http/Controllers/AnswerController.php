@@ -14,8 +14,9 @@ class AnswerController extends Controller
 
         foreach ($request->answers as $answer) {
             Answer::updateOrCreate(['id' => $answer['id']], $answer);
+            $linkcode_id = $answer['linkcode_id'];
         }
-        $linkcode = Linkcode::find($request->answers['linkcode_id']);
+        $linkcode = Linkcode::find($linkcode_id);
         $linkcode->done += 1;
         $linkcode->save();
 
