@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\QaController;
+use App\Http\Controllers\QsampleController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,5 +36,6 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('/project/getall', [ProjectController::class, 'getAll'])->middleware('auth:api');
     Route::get('/qa/{code}', [QaController::class, 'getQa']);
     Route::post('/answer/save', [AnswerController::class, 'save']);
+    Route::get('/qsample/getall', [QsampleController::class, 'getAll'])->middleware('auth:api');
 
 });

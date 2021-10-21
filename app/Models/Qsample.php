@@ -9,6 +9,6 @@ class Qsample extends Model
     protected $connection = 'mongodb';
 
     protected $fillable = [
-        'title',
+        'name', 'questions',
     ];
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\Linkcode;
 use App\Models\Project;
+use App\Models\Qsample;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,11 +14,15 @@ class ProjectController extends Controller
     public function save(Request $request)
     {
         if (Auth::check()) {
+            $checkSample = $request->checkSample;
             $projectData = $request->project;
             $companyData = $request->project['company'];
             $qaData = $request->project['qa'];
             $linkCodes = $request->project['linkcodes'];
             $company = Company::updateOrCreate(['name' => $companyData['name']], $companyData);
+            if ($checkSample) {
+                Qsample::updateOrCreate(['name' => $qaData['name']], $qaData);
+            }
             $projectData['company_id'] = $company->id;
             $project = Project::updateOrCreate(['id' => $projectData['id']], $projectData);
             if ($qaData != null) {
