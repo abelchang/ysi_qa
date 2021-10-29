@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\LinkcodeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +20,5 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
-
-Route::get('/{code}', [LinkcodeController::class, 'show']);
 
 require __DIR__ . '/auth.php';
